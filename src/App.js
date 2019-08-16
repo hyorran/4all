@@ -1,12 +1,10 @@
 import React from 'react'
-import ScreenDefault from './feature/ScreenDefault'
+import ScreenDefault from './features/screens/ScreenDefault'
+import { view } from 'react-easy-state'
+import appStore from './appStore'
 
-function App() {
+export default view( () => {
   return (
-    <div>
-      <ScreenDefault />
-    </div>
+      <ScreenDefault store={ appStore }/>
   )
-}
-
-export default App
+})
