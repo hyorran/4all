@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react'
-import MaterialTable from 'material-table'
-import AddBox from '@material-ui/icons/AddBox'
+import AddBox from '@material-ui/core/SvgIcon/SvgIcon'
 import ArrowUpward from '@material-ui/icons/ArrowUpward'
 import Check from '@material-ui/icons/Check'
 import ChevronLeft from '@material-ui/icons/ChevronLeft'
@@ -15,8 +14,6 @@ import Remove from '@material-ui/icons/Remove'
 import SaveAlt from '@material-ui/icons/SaveAlt'
 import Search from '@material-ui/icons/Search'
 import ViewColumn from '@material-ui/icons/ViewColumn'
-import Card from '@material-ui/core/Card'
-import appStore from '../../appStore'
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -38,30 +35,6 @@ const tableIcons = {
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
 }
 
-function GridContainer(props){
-  return (
-    <Card style={{
-      margin: 10
-    }}>
-      <MaterialTable
-        icons={tableIcons}
-        title="Produtos"
-        columns={[
-          { title: 'Name', field: 'name' },
-          { title: 'Description', field: 'description' },
-          { title: 'Price', field: 'price' }
-        ]}
-        data={appStore.products}
-        actions={[
-          {
-            icon: () => <AddBox />,
-            tooltip: 'Save User',
-            onClick: (event, rowData) => alert("You saved " + rowData.name)
-          }
-        ]}
-      />
-    </Card>
-  )
+export {
+  tableIcons
 }
-
-export default GridContainer

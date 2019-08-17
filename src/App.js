@@ -1,10 +1,13 @@
 import React from 'react'
-import ScreenDefault from './features/screens/ScreenDefault'
 import { view } from 'react-easy-state'
-import appStore from './appStore'
+import Main from './feat/Main'
+import Header from './feat/Header'
 
 export default view( () => {
   return (
-      <ScreenDefault store={ appStore }/>
+      <div>
+        <Header />
+        <Main />
+      </div>
   )
 })

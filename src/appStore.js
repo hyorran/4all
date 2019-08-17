@@ -1,4 +1,5 @@
 import { store } from 'react-easy-state'
+import { findIndex, pullAt } from 'lodash'
 
 const appStore = store({
   products: [
@@ -21,6 +22,10 @@ const appStore = store({
   ],
   categories: [
     {
+      id: -1,
+      name: 'Todos'
+    },
+    {
       id: 0,
       name: 'Bebidas'
     },
@@ -32,7 +37,39 @@ const appStore = store({
       id: 2,
       name: 'Salgados'
     }
-  ]
+  ],
+  counter: '',
+  counterState: '',
+  startCounter: () => null,
+  stopCounter: () => null,
+  selectedCategory: 0,
+  setSelectedCategory(categoryId) {
+    appStore.selectedCategory = categoryId
+  },
+  cart: [],
+  addToCart(product) {
+    appStore.startCounter()
+    let existentItem = findIndex(appStore.cart, item => {
+      return item.id === product.id
+    })
+    if(existentItem > -1){
+      appStore.cart[existentItem].quantity++
+    }else{
+      appStore.cart.push({
+        ...product,
+        quantity: 1
+      })
+    }
+  },
+  cleanAllCart(){
+    appStore.cart = []
+  },
+  removeFromCart(product) {
+    appStore.cart[appStore.cart.indexOf(product)].quantity--
+    if(appStore.cart[appStore.cart.indexOf(product)].quantity < 1){
+      pullAt(appStore.cart, appStore.cart.indexOf(product))
+    }
+  }
 })
 
 export default appStore
